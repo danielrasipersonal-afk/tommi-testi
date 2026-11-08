@@ -1,0 +1,482 @@
+<!doctype html>
+<!-- Animaatiot: bold = näyttävä, on = hillitty, off = pois. -->
+<html lang="fi" data-motion="bold">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>What Kind of Tommy Are You</title>
+    <meta name="description" content="Yksi Tommi, Kahdeksan Puolta. Hyvää isänpäivää!">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Valinnainen animaatiokerros: nämä kaksi riviä voi myös poistaa kokonaan. -->
+    <link rel="stylesheet" href="motion.css">
+    <script src="motion.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <!--
+      MUOKKAA VAIN NÄITÄ KAHTA TIEDOSTOA:
+      index.html: kaikki tekstit, kuvat, painikkeet ja sivujen rakenne.
+      styles.css: värit, fontit, koot, välit ja mobiiliasettelu.
+      Kuvapainikkeet, paluulinkit ja sivunumerot: vaihda img-elementin src.
+      Kuvat ovat assets/images-kansiossa. Säilytä linkkien alt-tekstit.
+
+      Jokainen template on kokonainen näkymä alatunnisteineen:
+      ETUSIVU → HAHMOVALIKKO → KYSYMYKSET 1–4 → HAHMOSIVUT 1–4.
+      Voit lisätä tavallista HTML:ää, kuvia ja omia CSS-luokkia niiden sisälle.
+      Tekstejä ei korvata JavaScriptistä.
+
+      Säilytä template-tunnisteet sekä toimintaan liittyvät data-*-attribuutit.
+      data-page-class määrää näkymän CSS-luokat (esim. quiz tai pink).
+      data-scores sisältää vastauksen pisteet hahmojen järjestyksessä.
+      app.js hoitaa navigoinnin, tallennuksen ja pisteytyksen automaattisesti.
+    -->
+    <main class="page home"></main>
+    <noscript>Ota JavaScript käyttöön käyttääksesi Tommi-testiä.</noscript>
+
+    <!-- ==================== ETUSIVU ==================== -->
+    <template id="home-template" data-page-class="home">
+      <!-- Pääotsikko: kumpikin span on oma rivinsä. -->
+      <h1 tabindex="-1" class="hero-title">
+        <span data-fit>What Kind of</span>
+        <span data-fit>Tommy Are You</span>
+      </h1>
+
+      <!-- Kuva sisältää sekä ympyrän että nuolen. aria-label nimeää painikkeen. -->
+      <button class="start" data-start aria-label="Aloita testi">
+        <img class="start-image" src="assets/images/start-arrow.png" alt="" width="709" height="709">
+      </button>
+
+      <!-- Koristeellinen allekirjoitus. Muoto määräytyy path-polusta. -->
+      <svg
+        class="signature"
+        viewBox="0 0 1000 460"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M187 93
+            C190 155 209 260 249 344
+            L147 249
+            C113 220 144 90 163 64
+            C193 12 225 10 272 17
+            C337 23 384 119 389 177
+            C395 263 313 337 275 363
+            C220 399 109 445 36 447
+            C-60 460 154 337 359 272
+            C549 211 839 139 976 162
+            C886 150 657 159 487 167
+            C450 169 413 176 382 198
+            C316 244 504 224 648 210
+            C555 196 476 137 423 85
+            L355 240
+            C409 172 502 80 563 80
+            C602 80 562 105 552 108
+            C526 119 554 148 538 151
+            C515 143 659 59 773 62
+            C818 57 767 157 779 174
+            C791 182 861 143 882 130
+            M422 84
+            C451 114 468 187 442 143
+            Z"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+
+      <!-- Tämän näkymän alatunniste: muokkaa tekstejä ja linkkejä suoraan tässä. -->
+      <footer>
+        <div class="footer-left">
+          <span class="brand">Yksi Tommi, Kahdeksan Puolta</span>
+          <a href="#menu">Every Tommi <span aria-hidden="true">⟶</span></a>
+        </div>
+        <div class="footer-right">
+          <span>hyvää isänpäivää!!!</span>
+          <span class="page-number">
+            <img src="assets/images/page-01.png" alt="Sivu 01" width="311" height="338">
+          </span>
+        </div>
+      </footer>
+    </template>
+
+    <!-- ==================== HAHMOVALIKKO ==================== -->
+    <template id="menu-template" data-page-class="menu">
+      <h1 tabindex="-1" class="sr-only">Every Tommi — Tommin monet puolet</h1>
+      <nav class="people-list" aria-label="Tommi-esittelyt">
+        <a href="#tommi-0" data-fit>Psykologi Tommi</a>
+        <a href="#tommi-1" data-fit>Huumori Tommi</a>
+        <a href="#tommi-2" data-fit>Seurapiiri Tommi</a>
+        <a href="#tommi-3" data-fit>Thinking Tommi</a>
+      </nav>
+
+      <!-- Tämän näkymän alatunniste: muokkaa tekstejä ja linkkejä suoraan tässä. -->
+      <footer>
+        <div class="footer-left">
+          <span class="brand">Yksi Tommi, Kahdeksan Puolta</span>
+          <a class="footer-image-link" href="#home">
+            <img src="assets/images/back-to-home-navy.png" alt="Back to Home" width="578" height="68">
+          </a>
+        </div>
+        <div class="footer-right">
+          <span>hyvää isänpäivää!!!</span>
+          <span class="page-number">
+            <img src="assets/images/page-09.png" alt="Sivu 09" width="358" height="338">
+          </span>
+        </div>
+      </footer>
+    </template>
+
+    <!-- ==================== KYSYMYS 1: Ystävällä on Raskasta ==================== -->
+    <template id="question-0-template" data-question data-page-class="quiz">
+      <h1 tabindex="-1" class="question-title">Ystävällä on Raskasta</h1>
+
+      <div class="question-area">
+        <div class="question-label">
+          <span>mitä teet?</span>
+          <span>Ystävällä on Raskasta</span>
+        </div>
+
+        <div class="answers">
+          <!-- Vastaus A -->
+          <button class="answer answer-0" data-answer="0" data-scores="3,0,0,1">
+            <strong>Pintaa syvemmälle 🧠</strong>
+            <span class="answer-copy">Kysyn, mikä viikossa on tuntunut kaikkein vaikeimmalta, ja kuuntelen rauhassa.</span>
+            <span class="letter">a</span>
+          </button>
+
+          <!-- Vastaus B -->
+          <button class="answer answer-1" data-answer="1" data-scores="3,0,1,0">
+            <strong>Pientä huolenpitoa 💛</strong>
+            <span class="answer-copy">Vien hänelle kahvia tai jotain hyvää ja kysyn, miten voisin auttaa. Pienikin teko voi keventää raskasta päivää.</span>
+            <span class="letter">b</span>
+          </button>
+
+          <!-- Vastaus C -->
+          <button class="answer answer-2" data-answer="2" data-scores="1,0,3,0">
+            <strong>Yhdessä on parempi 🎉</strong>
+            <span class="answer-copy">Kutsun hänet mukaan viettämään rentoa iltaa hyvässä seurassa. Ei tarvitse keksiä mitään erityistä — joskus yhdessä oleminen ja ihan tavallinen jutustelu tekevät jo paljon.</span>
+            <span class="letter">c</span>
+          </button>
+
+          <!-- Vastaus D -->
+          <button class="answer answer-3" data-answer="3" data-scores="1,3,0,0">
+            <strong>Hymyä synkkyyteen 😁</strong>
+            <span class="answer-copy">Kuuntelen ensin ja yritän sitten saada hänet hymyilemään lempeällä vitsillä. Jos koko viikkoa ei voi korjata, ehkä tästä hetkestä voi tehdä vähän kevyemmän.</span>
+            <span class="letter">d</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tämän näkymän alatunniste: muokkaa tekstejä ja linkkejä suoraan tässä. -->
+      <footer>
+        <div class="footer-left">
+          <span class="brand">Yksi Tommi, Kahdeksan Puolta</span>
+          <a class="footer-image-link" href="#home">
+            <img src="assets/images/back-to-home-white.png" alt="Back to Home" width="584" height="68">
+          </a>
+        </div>
+        <div class="footer-right">
+          <span>Ystävällä Raskasta</span>
+          <span class="page-number">
+            <img src="assets/images/page-02.png" alt="Sivu 02" width="352" height="338">
+          </span>
+        </div>
+      </footer>
+    </template>
+
+    <!-- ==================== KYSYMYS 2: Lauantai, ei Suunnitelmia ==================== -->
+    <template id="question-1-template" data-question data-page-class="quiz">
+      <h1 tabindex="-1" class="question-title">Lauantai, ei Suunnitelmia</h1>
+
+      <div class="question-area">
+        <div class="question-label">
+          <span>mitä teet?</span>
+          <span>Lauantai, No Plans</span>
+        </div>
+
+        <div class="answers">
+          <!-- Vastaus A -->
+          <button class="answer answer-0" data-answer="0" data-scores="1,0,0,3">
+            <strong>Tilaa ajatuksille 🌿</strong>
+            <span class="answer-copy">Lähden kävelylle ja annan ajatusten kulkea ilman sen suurempaa päämäärää.</span>
+            <span class="letter">a</span>
+          </button>
+
+          <!-- Vastaus B -->
+          <button class="answer answer-1" data-answer="1" data-scores="0,0,1,3">
+            <strong>Homma haltuun 🛠️</strong>
+            <span class="answer-copy">Tartun yhteen keskeneräiseen hommaan. Mietin rauhassa, miten sen saisi toimimaan, ja kokeilen ratkaisua käytännössä.</span>
+            <span class="letter">b</span>
+          </button>
+
+          <!-- Vastaus C -->
+          <button class="answer answer-2" data-answer="2" data-scores="0,1,0,3">
+            <strong>Ideasta liikkeelle 🚀</strong>
+            <span class="answer-copy">Kaivan esiin idean, joka on pyörinyt mielessä jo jonkin aikaa, ja alan kokeilla. Päivän päätteeksi siitä voi olla olemassa ensimmäinen versio ja kolme uutta jatkoajatusta.</span>
+            <span class="letter">c</span>
+          </button>
+
+          <!-- Vastaus D -->
+          <button class="answer answer-3" data-answer="3" data-scores="0,1,3,0">
+            <strong>Yksi juttu vielä 📖</strong>
+            <span class="answer-copy">Soitan jollekulle, koska mieleen tuli tarina, joka on ihan pakko kertoa. Puhelun piti kestää viisi minuuttia, mutta ensin täytyy tietenkin selittää, mistä kaikki alkoi.</span>
+            <span class="letter">d</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tämän näkymän alatunniste: muokkaa tekstejä ja linkkejä suoraan tässä. -->
+      <footer>
+        <div class="footer-left">
+          <span class="brand">Yksi Tommi, Kahdeksan Puolta</span>
+          <a class="footer-image-link" href="#home">
+            <img src="assets/images/back-to-home-white.png" alt="Back to Home" width="584" height="68">
+          </a>
+        </div>
+        <div class="footer-right">
+          <span>Lauantaina ei ole mitään</span>
+          <span class="page-number">
+            <img src="assets/images/page-03.png" alt="Sivu 03" width="338" height="338">
+          </span>
+        </div>
+      </footer>
+    </template>
+
+    <!-- ==================== KYSYMYS 3: Suunnitelmat Uusiksi ==================== -->
+    <template id="question-2-template" data-question data-page-class="quiz">
+      <h1 tabindex="-1" class="question-title">Suunnitelmat Uusiksi</h1>
+
+      <div class="question-area">
+        <div class="question-label">
+          <span>mitä teet?</span>
+          <span>Suunnitelmat Uusiksi</span>
+        </div>
+
+        <div class="answers">
+          <!-- Vastaus A -->
+          <button class="answer answer-0" data-answer="0" data-scores="3,0,1,0">
+            <strong>Kaikki kunnossa 🤗</strong>
+            <span class="answer-copy">Varmistan, ettei kenellekään jää paha mieli. Keksitään kyllä jotain.</span>
+            <span class="letter">a</span>
+          </button>
+
+          <!-- Vastaus B -->
+          <button class="answer answer-1" data-answer="1" data-scores="1,0,0,3">
+            <strong>Mikä oli tärkeintä? 🧭</strong>
+            <span class="answer-copy">Mietin, mitä päivältä oikeastaan haluttiin. Ehkä sen voi toteuttaa toisinkin.</span>
+            <span class="letter">b</span>
+          </button>
+
+          <!-- Vastaus C -->
+          <button class="answer answer-2" data-answer="2" data-scores="0,3,0,1">
+            <strong>Tässähän on mahdollisuus 💡</strong>
+            <span class="answer-copy">Heitän pienen vitsin: tästä tulee ainakin hyvä tarina. Ehdotan jotain yllättävää, ja pian harmitus vaihtuu nauruksi — ehkä tästä tuleekin päivän paras käänne.</span>
+            <span class="letter">c</span>
+          </button>
+
+          <!-- Vastaus D -->
+          <button class="answer answer-3" data-answer="3" data-scores="0,0,3,1">
+            <strong>Suunnitelma B 🗺️</strong>
+            <span class="answer-copy">Otan puhelimen esiin, tarkistan vaihtoehdot ja ehdotan uutta suunnitelmaa. Kun tiedetään, mikä on mahdollista, voidaan lopettaa harmittelu ja päästä taas tekemään jotain mukavaa.</span>
+            <span class="letter">d</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tämän näkymän alatunniste: muokkaa tekstejä ja linkkejä suoraan tässä. -->
+      <footer>
+        <div class="footer-left">
+          <span class="brand">Yksi Tommi, Kahdeksan Puolta</span>
+          <a class="footer-image-link" href="#home">
+            <img src="assets/images/back-to-home-white.png" alt="Back to Home" width="584" height="68">
+          </a>
+        </div>
+        <div class="footer-right">
+          <span>Suunnitelmat menee uusiksi</span>
+          <span class="page-number">
+            <img src="assets/images/page-04.png" alt="Sivu 04" width="358" height="338">
+          </span>
+        </div>
+      </footer>
+    </template>
+
+    <!-- ==================== KYSYMYS 4: Uusia Kasvoja Juhlissa ==================== -->
+    <template id="question-3-template" data-question data-page-class="quiz">
+      <h1 tabindex="-1" class="question-title">Uusia Kasvoja Juhlissa</h1>
+
+      <div class="question-area">
+        <div class="question-label">
+          <span>mitä teet?</span>
+          <span>Uusia kasvoja juhlissa</span>
+        </div>
+
+        <div class="answers">
+          <!-- Vastaus A -->
+          <button class="answer answer-0" data-answer="0" data-scores="3,0,0,1">
+            <strong>Hyvän keskustelun ääreltä 👂</strong>
+            <span class="answer-copy">Juttelen rauhassa yhden ihmisen kanssa. Kysyn lisää ja kuuntelen, mitä hänelle oikeasti kuuluu.</span>
+            <span class="letter">a</span>
+          </button>
+
+          <!-- Vastaus B -->
+          <button class="answer answer-1" data-answer="1" data-scores="0,3,1,0">
+            <strong>Nauravan keskeltä 😂</strong>
+            <span class="answer-copy">Olen heittänyt jotain hauskaa, ja alkujännitys on jo unohtunut.</span>
+            <span class="letter">b</span>
+          </button>
+
+          <!-- Vastaus C -->
+          <button class="answer answer-2" data-answer="2" data-scores="0,1,3,0">
+            <strong>Tarinan puolivälistä 🎙️</strong>
+            <span class="answer-copy">Kerron tarinaa, joka sopii tähän tilanteeseen aivan täydellisesti. Tai ainakin sopivuus selviää lopussa — ensin pitää esitellä tapahtumapaikka, pari tärkeää henkilöä ja yksi pieni sivujuonne.</span>
+            <span class="letter">c</span>
+          </button>
+
+          <!-- Vastaus D -->
+          <button class="answer answer-3" data-answer="3" data-scores="1,0,3,0">
+            <strong>Tutustumiskierrokselta 👋</strong>
+            <span class="answer-copy">Olen ehtinyt jutella vähän kaikkien kanssa ja löytänyt yllättäviä yhteisiä kiinnostuksen kohteita. Esittelen uusia tuttavuuksia toisilleen ja kutsun sivummalla seisovan mukaan meidän keskusteluun.</span>
+            <span class="letter">d</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tämän näkymän alatunniste: muokkaa tekstejä ja linkkejä suoraan tässä. -->
+      <footer>
+        <div class="footer-left">
+          <span class="brand">Yksi Tommi, Kahdeksan Puolta</span>
+          <a class="footer-image-link" href="#home">
+            <img src="assets/images/back-to-home-white.png" alt="Back to Home" width="584" height="68">
+          </a>
+        </div>
+        <div class="footer-right">
+          <span>Uusia kasvoja juhlissa</span>
+          <span class="page-number">
+            <img src="assets/images/page-05.png" alt="Sivu 05" width="345" height="338">
+          </span>
+        </div>
+      </footer>
+    </template>
+
+    <!-- ==================== HAHMO 1: Psykologi Tommi ==================== -->
+    <!-- Sama näkymä toimii esittelynä ja testituloksena. -->
+    <template id="tommi-0-template" data-person data-page-class="pink">
+      <h1 tabindex="-1" class="person-title" data-fit>Psykologi Tommi</h1>
+      <p class="tagline">Kuuntelet myös rivien välistä.</p>
+
+      <div class="person-body">
+        <p>Et kiirehdi vastaamaan, sillä haluat ensin ymmärtää. Kysyt juuri sen kysymyksen, joka saa toisen pysähtymään ja löytämään omat sanansa. Sun seurassa keskustelu saattaa alkaa säästä ja päätyä siihen, mitä elämässä oikeasti kuuluu.</p>
+        <blockquote>“Kerro lisää. Mulla ei ole kiire.”</blockquote>
+      </div>
+
+      <aside class="superpower">
+        <h2>Supervoimasi</h2>
+        <p>Saat toisen tuntemaan, että häntä kuullaan.</p>
+      </aside>
+
+      <!-- Tämän näkymän alatunniste: muokkaa tekstejä ja linkkejä suoraan tässä. -->
+      <footer>
+        <div class="footer-left">
+          <span class="brand">Meidän isässä on nämä kaikki.</span>
+          <a class="footer-image-link" href="#menu">
+            <img src="assets/images/back-to-menu-pink.png" alt="Back to Menu" width="584" height="68">
+          </a>
+        </div>
+        <div class="footer-right">
+          <span>Hyvää isänpäivää, Tommi.</span>
+        </div>
+      </footer>
+    </template>
+
+    <!-- ==================== HAHMO 2: Huumori Tommi ==================== -->
+    <!-- Sama näkymä toimii esittelynä ja testituloksena. -->
+    <template id="tommi-1-template" data-person data-page-class="yellow">
+      <h1 tabindex="-1" class="person-title" data-fit>Huumori Tommi</h1>
+      <p class="tagline">Pilke silmäkulmassa, aina.</p>
+
+      <div class="person-body">
+        <p>Löydät arjesta koomisen yksityiskohdan, joka muilta meni ohi. Sulla on heitto valmiina, ja toisinaan naurat sille ensimmäisenä itse. Sun seurassa hankalakin päivä voi saada hauskan käänteen — tai ainakin hyvän loppukommentin.</p>
+        <blockquote>“Tästä tulee vielä hyvä juttu..”</blockquote>
+      </div>
+
+      <aside class="superpower">
+        <h2>Supervoimasi</h2>
+        <p>Saat ihmiset hengähtämään ja nauramaan yhdessä.</p>
+      </aside>
+
+      <!-- Tämän näkymän alatunniste: muokkaa tekstejä ja linkkejä suoraan tässä. -->
+      <footer>
+        <div class="footer-left">
+          <span class="brand">Meidän isässä on nämä kaikki.</span>
+          <a class="footer-image-link" href="#menu">
+            <img src="assets/images/back-to-menu-yellow.png" alt="Back to Menu" width="584" height="68">
+          </a>
+        </div>
+        <div class="footer-right">
+          <span>Hyvää isänpäivää, Tommi.</span>
+        </div>
+      </footer>
+    </template>
+
+    <!-- ==================== HAHMO 3: Seurapiiri-Tommi ==================== -->
+    <!-- Sama näkymä toimii esittelynä ja testituloksena. -->
+    <template id="tommi-2-template" data-person data-page-class="peach">
+      <h1 tabindex="-1" class="person-title" data-fit>Seurapiiri-Tommi</h1>
+      <p class="tagline">Tuntematon on tuleva juttukaveri.</p>
+
+      <div class="person-body">
+        <p>Et tarvitse muodollista esittelyä aloittaaksesi keskustelun. Juttelet, kyselet ja löydät yhteisen aiheen melkein kenen tahansa kanssa. Samalla huomaat senkin, joka jäi vähän sivuun, ja teet hänelle tilaa porukassa.</p>
+        <blockquote>“Tuu säkin tähän meidän kanssa!”</blockquote>
+      </div>
+
+      <aside class="superpower">
+        <h2>Supervoimasi</h2>
+        <p>Saat ihmiset tuntemaan itsensä tervetulleiksi.</p>
+      </aside>
+
+      <!-- Tämän näkymän alatunniste: muokkaa tekstejä ja linkkejä suoraan tässä. -->
+      <footer>
+        <div class="footer-left">
+          <span class="brand">Meidän isässä on nämä kaikki.</span>
+          <a class="footer-image-link" href="#menu">
+            <img src="assets/images/back-to-menu-peach.png" alt="Back to Menu" width="575" height="68">
+          </a>
+        </div>
+        <div class="footer-right">
+          <span>Hyvää isänpäivää, Tommi.</span>
+        </div>
+      </footer>
+    </template>
+
+    <!-- ==================== HAHMO 4: Thinking Tommi ==================== -->
+    <!-- Sama näkymä toimii esittelynä ja testituloksena. -->
+    <template id="tommi-3-template" data-person data-page-class="mint">
+      <h1 tabindex="-1" class="person-title" data-fit>Thinking Tommi</h1>
+      <p class="tagline">Pieni kysymys. Suuri ajatus.</p>
+
+      <div class="person-body">
+        <p>Lähdit hakemaan kahvia ja päädyit miettimään, mistä hyvä elämä muodostuu. Tykkäät katsella asioita eri suunnista etkä tarvitse jokaiseen kysymykseen välitöntä vastausta. Sun kanssa arkinenkin keskustelu voi avata uuden näkökulman.</p>
+        <blockquote>“Mutta mikä tässä lopulta on tärkeintä?”</blockquote>
+      </div>
+
+      <aside class="superpower">
+        <h2>Supervoimasi</h2>
+        <p>Huomaat olennaisen kiireen ja itsestäänselvyyksien keskeltä.</p>
+      </aside>
+
+      <!-- Tämän näkymän alatunniste: muokkaa tekstejä ja linkkejä suoraan tässä. -->
+      <footer>
+        <div class="footer-left">
+          <span class="brand">Meidän isässä on nämä kaikki.</span>
+          <a class="footer-image-link" href="#menu">
+            <img src="assets/images/back-to-menu-mint.png" alt="Back to Menu" width="584" height="68">
+          </a>
+        </div>
+        <div class="footer-right">
+          <span>Hyvää isänpäivää, Tommi.</span>
+        </div>
+      </footer>
+    </template>
+  </body>
+</html>
